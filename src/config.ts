@@ -9,4 +9,4 @@ export const CONFIG = {
   PRECO_ANUAL: 394.00
 };
 
-export const N8N_WEBHOOK = 'http://localhost:5678/webhook/madame-luar-protegido';
+export const N8N_WEBHOOK = 'https://antarctica-discretion-controlled-programs.trycloudflare.com/webhook/madame-luar-protegido';
