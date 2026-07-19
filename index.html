@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
   <head>
@@ -27,5 +26,30 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      (() => {
+        const applyLegalLinks = () => {
+          document.querySelectorAll('a').forEach((link) => {
+            const label = (link.textContent || '').trim();
+            if (label === 'Termos de Uso') link.setAttribute('href', '/terms-of-service');
+            if (label === 'Privacidade') link.setAttribute('href', '/privacy-policy');
+          });
+
+          const footer = document.querySelector('footer');
+          if (footer && !document.getElementById('official-api-notice')) {
+            const notice = document.createElement('p');
+            notice.id = 'official-api-notice';
+            notice.textContent = 'Integrações de marketing utilizam somente contas autorizadas e APIs oficiais das plataformas.';
+            notice.style.cssText = 'margin:16px auto 0;max-width:760px;padding:0 16px;text-align:center;font-size:12px;line-height:1.5;opacity:.55;';
+            footer.appendChild(notice);
+          }
+        };
+
+        const observer = new MutationObserver(applyLegalLinks);
+        observer.observe(document.body, { childList: true, subtree: true });
+        window.addEventListener('DOMContentLoaded', applyLegalLinks);
+        window.setTimeout(applyLegalLinks, 800);
+      })();
+    </script>
   </body>
 </html>
